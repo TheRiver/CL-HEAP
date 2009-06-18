@@ -1,0 +1,6 @@
+2009-06-18  Rudy Neeser  <rudy.neeser@gmail.com>
+
+	* fibonacci-heap.lisp (pop-heap): Fixed a bug which created an
+	array one size too small, causing POP-HEAP operations to
+	intermittently fail.
+

@@ -260,7 +260,7 @@ heap."
 	(concatenate-node-lists root (node-child root))
 	(setf root (delete-node root))
 	(when root
-	  (let ((ranks (make-array (ceiling (log count 2))  :initial-element nil))
+	  (let ((ranks (make-array (1+ (ceiling (log count 2)))  :initial-element nil))
 		(min nil))
 	    ;; Merge all trees of the same rank.
 	    (labels ((sort-node (node)
