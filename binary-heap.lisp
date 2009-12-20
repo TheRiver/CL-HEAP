@@ -1,3 +1,4 @@
+(declaim (optimize (debug 3) (safety 3) (speed 0)))
 ;;; Copyright 2009 Rudolph Neeser <rudy.neeser@gmail.com>.
 ;;; 
 ;;; This file is part of CL-HEAP
@@ -131,7 +132,7 @@ heap. This is an O(1) operation."
 number of items in the heap."
   (with-slots (data
 	       (factor extension-factor)) heap
-    (vector-push-extend item data (ceiling (* (/ factor 100)  (length data))))
+    (vector-push-extend item data (ceiling (* (/ factor 100)  (array-total-size data))))
     (values item (percolate-up heap (1- (length data))))))
 
 (defmethod pop-heap ((heap binary-heap))
@@ -153,7 +154,7 @@ O(n + log(n)) = O(n) operation. Returns the BINARY-HEAP."
 	       (factor extension-factor)) heap
     ;; Add all items, which is linear time since no sorting occurs here.
     (loop for item in items
-       do (vector-push-extend item data (ceiling (* (/ factor 100) (length data)))))
+       do (vector-push-extend item data (ceiling (* (/ factor 100) (array-total-size data)))))
     (loop for position from (parent-position (1- (length data))) downto 0
        do (percolate-down heap position)))
   heap)
