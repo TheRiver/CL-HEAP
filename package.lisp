@@ -1,4 +1,4 @@
-;;; Copyright 2009 Rudolph Neeser <rudy.neeser@gmail.com>
+;;; Copyright 2009-2010 Rudolph Neeser <rudy.neeser@gmail.com>
 ;;; 
 ;;; This file is part of CL-HEAP
 ;;; 

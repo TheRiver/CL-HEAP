@@ -1,3 +1,11 @@
+2010-03-17  Rudy Neeser  <rudy.neeser@gmail.com>
+
+	* cl-heap-tests.asd: Added a new system definition file to run the
+	testing framework for the package.
+
+	* cl-heap.asd: Removed the automatic loading of the testing
+	framework.
+
 2009-12-20  Rudy Neeser  <rudy.neeser@gmail.com>
 
 	* binary-heap.lisp (add-to-heap, add-all-to-heap): Fixed a bug in

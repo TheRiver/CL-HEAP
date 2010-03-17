@@ -1,4 +1,6 @@
-;;; Copyright 2009-2010 Rudolph Neeser <rudy.neeser@gmail.com>.
+;;; -*- Mode: Lisp; -*-
+;;;
+;;; Copyright 2009-2010 Rudolph Neeser <rudy.neeser@gmail.com>
 ;;; 
 ;;; This file is part of CL-HEAP
 ;;; 
@@ -17,18 +19,19 @@
 
 ;;;----------------------------------------------------------------
 
-(in-package #:cl-heap)
 
-;;;----------------------------------------------------------------
+(defpackage #:cl-heap-tests-asdf
+  (:use :common-lisp :asdf))
 
-(define-condition heap-error (error)
-  ((message :initform "An error has occured while using this data structure."
-	    :initarg :message
-	    :reader heap-error-message))
-  (:documentation "The base condition type for all errors that should
-  generally be thrown in the CL-HEAP package.")
-  (:report (lambda (condition stream)
-	     (format stream (heap-error-message condition)))))
+(in-package #:cl-heap-tests-asdf)
 
-(define-condition key-error (heap-error)
-  ((message :initform "When using DECREASE-KEY, the HEAP-KEY function should always take two arguments.")))
+(defsystem :cl-heap-tests
+    :description "Tests for the CL-HEAP package, an implementation of
+    heap and priority queue data structures."
+    :version "0.1.3"
+    :author "Rudy Neeser <rudy.neeser@gmail.com>"
+    :license "GPLv3"
+    :depends-on (:xlunit :cl-heap)
+    :serial t
+    :components ((:file "tests")))
+
