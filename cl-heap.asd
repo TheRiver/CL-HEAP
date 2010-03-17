@@ -1,6 +1,6 @@
 ;;; -*- Mode: Lisp; -*-
 ;;;
-;;; Copyright 2009 Rudolph Neeser <rudy.neeser@gmail.com>
+;;; Copyright 2009-2010 Rudolph Neeser <rudy.neeser@gmail.com>
 ;;; 
 ;;; This file is part of CL-HEAP
 ;;; 
@@ -27,16 +27,14 @@
 
 (defsystem :cl-heap
     :description "An implementation of heap and priority queue data structures."
-    :version "0.1"
+    :version "0.1.3"
     :author "Rudy Neeser <rudy.neeser@gmail.com>"
     :license "GPLv3"
-    :depends-on (:xlunit)
     :serial t
     :components ((:file "package")
 		 (:file "condition")
 		 (:file "heap")
 		 (:file "binary-heap")
 		 (:file "fibonacci-heap")
-		 (:file "priority-queue")
-		 (:file "tests")))
+		 (:file "priority-queue")))
 
