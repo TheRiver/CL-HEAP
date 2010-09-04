@@ -41,14 +41,14 @@
 
 (declaim (inline children-positions))
 (defun children-positions (position)
-  (declare (type fixnum position))
+  (declare (type integer position))
   (check-type position (integer 0 *))
   (values (1+ (* position 2))
 	  (+ 2 (* position 2))))
 
 (declaim (inline parent-position))
 (defun parent-position (position)
-  (declare (type fixnum position))
+  (declare (type integer position))
   (check-type position (integer 0 *))
   (values (floor (/ (1- position) 2))))
 
@@ -56,7 +56,7 @@
   (:documentation "Used to move a value in the DATA array of a
   BINARY-HEAP down the parent-child relationship hierarchy, and so
   preserve heap-ordering.")
-  (:method ((heap binary-heap) (position fixnum))
+  (:method ((heap binary-heap) (position integer))
     (with-slots (data) heap
       (labels ((choose-one (lhs rhs)
 		 ;; Of two nodes, returns the "least"
@@ -88,7 +88,7 @@
 	      (percolate-down heap chosen))))))))
 
 (defgeneric percolate-up (heap position)
-  (:method ((heap binary-heap) (position fixnum))
+  (:method ((heap binary-heap) (position integer))
     (with-slots (data) heap
       (cond
 	((and (/= position 0)
@@ -205,7 +205,7 @@ which it becomes O(n + m + log(n + m))."
 	     do (percolate-down first position))))
       first)))
 
-(defmethod decrease-key ((heap binary-heap) (item-index fixnum) value)
+(defmethod decrease-key ((heap binary-heap) (item-index integer) value)
   "Deceases the key of the item pointed to by ITEM-INDEX. The index is
   returned as the second value of ADD-TO-HEAP. The value of the item
   at the index is changed to VALUE, which should be less than its old
@@ -235,7 +235,7 @@ which it becomes O(n + m + log(n + m))."
     (percolate-up heap item-index))
   heap)
 
-(defmethod delete-from-heap ((heap binary-heap) (item-index fixnum))
+(defmethod delete-from-heap ((heap binary-heap) (item-index integer))
   "Deltes an item from the heap. ITEM-INDEX is an index representing
   the value to remove, and is the second value returned from
   ADD-TO-HEAP. Note that running most HEAP functions can modify which
