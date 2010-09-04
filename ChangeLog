@@ -1,3 +1,11 @@
+2010-09-04  Rudy Neeser  <rudy.neeser@gmail.com>
+
+	* binary-heap.lisp (children-positions, parent-position)
+	(percolate-down, percolate-up, decrease-key, delete-from-heap):
+	Changed the specialising class for various index arguments to
+	these functions from FIXNUM to INTEGER in order to increase
+	portabilty.
+
 2010-03-17  Rudy Neeser  <rudy.neeser@gmail.com>
 
 	* cl-heap-tests.asd: Added a new system definition file to run the

@@ -27,7 +27,7 @@
 
 (defsystem :cl-heap
     :description "An implementation of heap and priority queue data structures."
-    :version "0.1.3"
+    :version "0.1.4"
     :author "Rudy Neeser <rudy.neeser@gmail.com>"
     :license "GPLv3"
     :serial t
