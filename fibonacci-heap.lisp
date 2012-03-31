@@ -1,4 +1,5 @@
 ;;; Copyright 2009-2010 Rudolph Neeser <rudy.neeser@gmail.com>.
+;;; Copyright 2012 CL-HEAP (See AUTHORS file).
 ;;; 
 ;;; This file is part of CL-HEAP
 ;;; 
@@ -81,16 +82,10 @@
   (:method ((lhs null) (rhs node))
     rhs)
   (:method ((lhs node) (rhs node))
-    (with-slots ((lhs-next next)
-		 (lhs-last last)
-		 (lhs-item item)) lhs
-      (with-slots ((rhs-next next)
-		   (rhs-last last)
-		   (rhs-item item)) rhs
-	(psetf (node-next lhs) rhs
-	       (node-last (node-next lhs)) (node-last rhs)
-	       (node-last rhs) lhs
-	       (node-next (node-last rhs)) (node-next lhs))))
+    (psetf (node-next lhs) rhs
+	   (node-last (node-next lhs)) (node-last rhs)
+	   (node-last rhs) lhs
+	   (node-next (node-last rhs)) (node-next lhs))
     lhs))
 
 

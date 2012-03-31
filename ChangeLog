@@ -1,3 +1,16 @@
+2012-03-31  Rudy Neeser  <rudy.neeser@gmail.com>
+
+	* cl-heap-tests.asd (:cl-heap-tests): Updated version number to
+	0.1.5
+
+	* cl-heap.asd (:cl-heap): Updated version number to 0.1.5
+
+	* heap.lisp (print-object):
+	Removed unnecessary slot accessor. Patch by Michał Psota.
+
+	* fibonacci-heap.lisp (concatenate-node-lists):
+	Removed unnecessary slot accessors. Patch by Michał Psota.
+
 2010-09-04  Rudy Neeser  <rudy.neeser@gmail.com>
 
 	* binary-heap.lisp (children-positions, parent-position)

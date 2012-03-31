@@ -1,4 +1,5 @@
 ;;; Copyright 2009-2010 Rudolph Neeser <rudy.neeser@gmail.com>.
+;;; Copyright 2012 CL-HEAP (See AUTHORS file).
 ;;; 
 ;;; This file is part of CL-HEAP
 ;;; 
@@ -113,6 +114,5 @@
 
 (defmethod print-object ((heap heap) stream)
   (print-unreadable-object (heap stream :type t :identity t)
-    (with-slots (key sort-fun) heap
-      (format stream "Size: ~A"	 (heap-size heap)))))
+    (format stream "Size: ~A" (heap-size heap))))
 

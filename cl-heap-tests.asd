@@ -1,6 +1,6 @@
 ;;; -*- Mode: Lisp; -*-
 ;;;
-;;; Copyright 2009-2010 Rudolph Neeser <rudy.neeser@gmail.com>
+;;; Copyright 2009-2010, 2012 Rudolph Neeser <rudy.neeser@gmail.com>
 ;;; 
 ;;; This file is part of CL-HEAP
 ;;; 
@@ -28,7 +28,7 @@
 (defsystem :cl-heap-tests
     :description "Tests for the CL-HEAP package, an implementation of
     heap and priority queue data structures."
-    :version "0.1.3"
+    :version "0.1.5"
     :author "Rudy Neeser <rudy.neeser@gmail.com>"
     :license "GPLv3"
     :depends-on (:xlunit :cl-heap)
