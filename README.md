@@ -1,5 +1,5 @@
-			       CL-HEAP
-			       =======
+CL-HEAP
+=======
 
 CL-HEAP is a Common Lisp library that provides efficient priority
 queue and heap implementations. Heaps are tree data structure in which
@@ -35,8 +35,8 @@ details. The Fibonacci heap should generally be your heap of choice
 from this library.
 
 
-			Installation and Usage
-			----------------------
+Installation and Usage
+----------------------
 
 CL-HEAP depends on XLUNIT, which is used to perform unit
 testing. CL-HEAP has been tested and is known to run on SBCL. If
@@ -50,8 +50,8 @@ And the library can then be loaded with ASDF:
 
 (asdf:oos 'asdf:load-op 'cl-heap)
 
-			      Test Suite
-			      ----------
+Test Suite
+----------
 
 CL-HEAP comes with a test suite. The tests for the various classes can
 be performed as follows:
@@ -61,8 +61,8 @@ be performed as follows:
 (xlunit:textui-test-run (xlunit:get-suite cl-heap:priority-queue-test))
 
 
-		       The PRIORITY-QUEUE Class
-		       ------------------------
+The PRIORITY-QUEUE Class
+------------------------
 
 This priority queue is a container for items in which all the items
 are sorted by some given priority. We implement the priority queue
@@ -93,8 +93,8 @@ will cause the queue to always return the item of lowest priority.
 	 Returns the number of items in the queue. Running time: O(1)
 			    
 
-			    The HEAP Class
-			    --------------
+The HEAP Class
+--------------
 
 HEAP provides functionality common to the two heap classes implement
 by CL-HEAP. Each heap implementation accepts at least two arguments to
@@ -180,8 +180,8 @@ Of course, if DECREASE-KEY is not going to be used, then #'first
 itself could simply be used as the HEAP-KEY.
 	
 
-			The BINARY-HEAP Class
-			---------------------
+The BINARY-HEAP Class
+---------------------
 
 BINARY-HEAP is constructed in the typical fashion, using an array. The
 BINARY-HEAP MAKE-INSTANCE call accepts an extra argument, :size, which
@@ -226,8 +226,8 @@ the sizes of various heaps.
 (DELETE-FROM-HEAP heap item-index)    => O(log(n))
 
 
-		       The FIBONACCI-HEAP Class
-		       ------------------------
+The FIBONACCI-HEAP Class
+------------------------
 
 The details of the Fibonacci heap are given in "Fibonacci Heaps and
 Their Uses in Improved Network Optimization Algorithms", by Fredman
@@ -265,8 +265,8 @@ the sizes of various heaps.
 					 amortised O(log(n))
 
 
-			   Examples of Use
-			   ---------------
+Examples of Use
+---------------
 
 A heap can be created quite simply:
 
@@ -331,8 +331,8 @@ DECREASE-KEY and DELETE-FROM-HEAP can be used as follows:
 Smallest item: 1
 Smallest item: 0     
 
-			       License
-			       -------
+License
+-------
 
 CL-HEAP is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
@@ -348,8 +348,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-			      References
-			      ----------
+References
+----------
  
 M. L. Fredman and R. E. Tarjan. 1987. "Fibonacci Heaps and Their Uses
 in Improved Network Optimizxation Algorithms". Journal of the
