@@ -76,33 +76,43 @@ are sorted by some given priority. We implement the priority queue
 using a Fibonacci heap.
       
 
-MAKE-INSTANCE accepts the argument :sort-fun to provide the function
+*MAKE-INSTANCE* accepts the argument :sort-fun to provide the function
 which the items' priorities are sorted by. This defaults to #'<, which
 will cause the queue to always return the item of lowest priority.
 
-```lisp (ENQUEUE queue item priority)```
-
+```lisp
+(ENQUEUE queue item priority)
+```
 Adds the item to the queue at the given priority. Returns a
 list containing first the item's priority, then the item
 itself. Running time: O(1)
 
-(DEQUEUE queue)
 
+```lisp
+(DEQUEUE queue)
+```
 Removes the item of lowest priority from the queue. Running
 time: amortised O(log(n))
 
-      (PEEP-AT-QUEUE queue)
 
+```lisp
+(PEEP-AT-QUEUE queue)
+```
 Returns the item of lowest priority from the queue, without
 modifying the queue. Running time: O(1)
 
-      (EMPTY-QUEUE queue)
 
+```lisp
+(EMPTY-QUEUE queue)
+```
 Removes all items from the queue. Returns the heap. Running
 time: O(1)
 
+
+```lisp
 (QUEUE-SIZE queue)
-	 Returns the number of items in the queue. Running time: O(1)
+```
+Returns the number of items in the queue. Running time: O(1)
 			    
 
 The HEAP Class
