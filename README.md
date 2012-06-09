@@ -53,7 +53,7 @@ let me know. The library can be installed using ASDF-INSTALL:
 And the library can then be loaded with ASDF:
 
 ```lisp
-(asdf:oos 'asdf:load-op 'cl-heap)
+(asdf:load-system 'cl-heap)
 ```
 
 Test Suite
@@ -79,10 +79,11 @@ MAKE-INSTANCE accepts the argument :sort-fun to provide the function
 which the items' priorities are sorted by. This defaults to #'<, which
 will cause the queue to always return the item of lowest priority.
 
-(ENQUEUE queue item priority)
-	 Adds the item to the queue at the given priority. Returns a
-	 list containing first the item's priority, then the item
-	 itself. Running time: O(1)
+     (ENQUEUE queue item priority)
+
+     Adds the item to the queue at the given priority. Returns a
+     list containing first the item's priority, then the item
+     itself. Running time: O(1)
 
 (DEQUEUE queue)
 	 Removes the item of lowest priority from the queue. Running
