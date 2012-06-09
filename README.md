@@ -12,12 +12,13 @@ minimum spanning trees.
 The library is simple to use. Here's an example covering most of the
 priority queue functionality:
 
-(defparameter *queue* (make-instance 'cl-heap:priority-queue))
-
+	 (defparameter *queue* (make-instance 'cl-heap:priority-queue))
+```lisp
 (cl-heap:enqueue *queue* 'test 15) ; Enqueue the item with the priority of 15.
 (cl-heap:enqueue *queue* 'this -5)
 (cl-heap:enqueue *queue* 'a 10)
 (cl-heap:enqueue *queue* 'is 5)
+```
 
 (cl-heap:peep-at-queue *queue*) => 'this
 
@@ -99,8 +100,8 @@ The HEAP Class
 HEAP provides functionality common to the two heap classes implement
 by CL-HEAP. Each heap implementation accepts at least two arguments to
 MAKE-INSTANCE: :key and :sort-fun. :sort-fun supplies the function to
-be used when comparing two objects to each other, and defaults to
-#'<. :key gives a function which should be first applied to the
+be used when comparing two objects to each other, and defaults to #'<.
+:key gives a function which should be first applied to the
 elements in the HEAP before comparing them using the sorting
 function. :key defaults to #'identity. These functions can be accessed
 using HEAP-KEY and HEAP-SORTING-FUNCTION.
