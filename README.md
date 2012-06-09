@@ -129,63 +129,85 @@ using HEAP-KEY and HEAP-SORTING-FUNCTION.
 
 Both of the heap implementations obey the same interface:
 
+```lisp
 (HEAP-KEY heap)
-	 Returns the function passed as the :key argument to the heap.
+```
+Returns the function passed as the :key argument to the heap.
 
+```lisp
 (HEAP-SORTING-FUNCTION heap)
-	 Returns the function used to sort the elements in the heap.
+```
+Returns the function used to sort the elements in the heap.
 
+```lisp
 (HEAP-SIZE heap)
-	 Returns the number of elements in the heap.
+```
+Returns the number of elements in the heap.
 
+```lisp
 (EMPTY-HEAP heap)
-	 Removes all items from the heap, and returns the heap.
+```
+Removes all items from the heap, and returns the heap.
 
+```lisp
 (IS-EMPTY-HEAP-P heap)
-	 Returns true iff the heap contains no elements.
+```
+Returns true iff the heap contains no elements.
 
+```lisp
 (ADD-TO-HEAP heap item)
-	 Adds the given item to the heap. Returns two values: first
-	 the item itself, and then some index-key which can be used by
-	 DECREASE-KEY and DELETE-KEY to identify which values should
-	 be affected by these operations. See below for an example.
+```
+Adds the given item to the heap. Returns two values: first the item
+itself, and then some index-key which can be used by DECREASE-KEY and
+DELETE-KEY to identify which values should be affected by these
+operations. See below for an example.
 
+```lisp
 (ADD-ALL-TO-HEAP heap items)
-	 Adds all items in the list to the heap, as if by repeated
-	 calls to ADD-TO-HEAP. ADD-ALL-TO-HEAP can often be
-	 implemented more efficiently, though, than by merely
-	 executing consecutive calls to ADD-TO-HEAP directly. Returns
-	 the heap object.
+```
+Adds all items in the list to the heap, as if by repeated calls to
+ADD-TO-HEAP. ADD-ALL-TO-HEAP can often be implemented more
+efficiently, though, than by merely executing consecutive calls to
+ADD-TO-HEAP directly. Returns the heap object.
 
+```lisp
 (PEEP-AT-HEAP heap)
-	 Returns the minimum item in the heap, without modifying the
-	 heap.
+```
+Returns the minimum item in the heap, without modifying the heap.
 
+```lisp
 (POP-HEAP heap)
-	 Removes the smallest item in the heap, and returns it.
+```
+Removes the smallest item in the heap, and returns it.
 
+```lisp
 (MERGE-HEAPS first second)
-	 Returns a new heap which contains all the items in both
-	 heaps. Only heaps which use the same HEAP-KEY and
-	 HEAP-SORTING-FUNCTION can be merged, otherwise a HEAP-ERROR
-	 is signalled.
+```
+Returns a new heap which contains all the items in both heaps. Only
+heaps which use the same HEAP-KEY and HEAP-SORTING-FUNCTION can be
+merged, otherwise a HEAP-ERROR is signalled.
 
+```lisp
 (NMERGE-HEAPS first second)
-	 Destructively creates a new heap which contains the items in
-	 both heaps. Only heaps which use the same HEAP-KEY and
-	 HEAP-SORTING-FUNCTION can be merged, otherwise a HEAP-ERROR
-	 is signalled.
+```
+Destructively creates a new heap which contains the items in both
+heaps. Only heaps which use the same HEAP-KEY and
+HEAP-SORTING-FUNCTION can be merged, otherwise a HEAP-ERROR is
+signalled.
 
+```lisp
 (DECREASE-KEY heap item-index value)
-	 Allows you to specify an item in the heap whose value should
-	 be decreased. ITEM-INDEX is the second value returned by
-	 ADD-TO-HEAP, and VALUE should be smaller than the items
-	 current value, or a KEY-ERROR will be signalled. Returns the
-	 heap. See below for an example.
+```
+Allows you to specify an item in the heap whose value should be
+decreased. ITEM-INDEX is the second value returned by ADD-TO-HEAP, and
+VALUE should be smaller than the items current value, or a KEY-ERROR
+will be signalled. Returns the heap. See below for an example.
 
+```lisp
 (DELETE-FROM-HEAP heap item-index)
-	 Allows you to specify an arbitrary item to remove from the
-	 heap. ITEM-INDEX is the second value returned by ADD-TO-HEAP.
+```
+Allows you to specify an arbitrary item to remove from the
+heap. ITEM-INDEX is the second value returned by ADD-TO-HEAP.
 
 DECREASE-KEY requires that HEAP-KEY is either the function IDENTITY,
 or a function that accepts an optional second argument, which will be
@@ -193,11 +215,13 @@ the value of the new key. For instance, if the elements in the heap
 are lists, and they are to be sorted by the first element in the list,
 an appropriate HEAP-KEY could be:
 
+```lisp
 (lambda (item &optional new-value)
     (if new-value
         (setf (first item) new-value)
 	(first item)))
-
+```
+	
 Of course, if DECREASE-KEY is not going to be used, then #'first
 itself could simply be used as the HEAP-KEY.
 	
@@ -217,35 +241,38 @@ FIBONACCI-HEAP instead.
 
 BINARY-HEAP provides an extra function to the above API:
 
+```lisp
 (BINARY-HEAP-EXTENSION-FACTOR heap)
-	 The percentage at which the space allocated for data in the
-	 heap should grow at once that space has been exceeded. This
-	 defaults to 50.
+```
+The percentage at which the space allocated for data in the heap
+should grow at once that space has been exceeded. This defaults to 50.
 
 Here are the Big-Oh running times for the heap API, where n and m are
 the sizes of various heaps.
 
-(HEAP-SIZE heap)    	    	      => O(1)
+```lisp
+(HEAP-SIZE heap)    	    	      ; O(1)
 
-(EMPTY-HEAP heap)		      => O(1)
+(EMPTY-HEAP heap)		      ; O(1)
 
-(IS-EMPTY-HEAP-P heap)		      => O(1)
+(IS-EMPTY-HEAP-P heap)		      ; O(1)
 
-(ADD-TO-HEAP heap item)		      => O(log(n))
+(ADD-TO-HEAP heap item)		      ; O(log(n))
 
-(ADD-ALL-TO-HEAP heap items)	      => O(n)
+(ADD-ALL-TO-HEAP heap items)	      ; O(n)
 
-(PEEP-AT-HEAP heap)   		      => O(1)
+(PEEP-AT-HEAP heap)   		      ; O(1)
 
-(POP-HEAP heap)			      => O(log(n))
+(POP-HEAP heap)			      ; O(log(n))
 
-(MERGE-HEAPS first second)	      => O(n + m + log(n + m))
+(MERGE-HEAPS first second)	      ; O(n + m + log(n + m))
 
-(NMERGE-HEAPS first second)	      => O(m + log(n + m))
+(NMERGE-HEAPS first second)	      ; O(m + log(n + m))
 
-(DECREASE-KEY heap item-index value)  => O(log(n))
+(DECREASE-KEY heap item-index value)  ; O(log(n))
 
-(DELETE-FROM-HEAP heap item-index)    => O(log(n))
+(DELETE-FROM-HEAP heap item-index)    ; O(log(n))
+```
 
 
 The FIBONACCI-HEAP Class
@@ -261,87 +288,107 @@ generally be used instead of BINARY-HEAP.
 Here are the Big-Oh running times for the heap API, where n and m are
 the sizes of various heaps.
 
-(HEAP-SIZE heap)    	    	      => O(1)
+```lisp
+(HEAP-SIZE heap)    	    	      ; O(1)
 
-(EMPTY-HEAP heap)		      => O(1)
+(EMPTY-HEAP heap)		      ; O(1)
 
-(IS-EMPTY-HEAP-P heap)		      => O(1)
+(IS-EMPTY-HEAP-P heap)		      ; O(1)
 
-(ADD-TO-HEAP heap item)		      => O(1)
+(ADD-TO-HEAP heap item)		      ; O(1)
 
-(ADD-ALL-TO-HEAP heap items)	      => O(n)
+(ADD-ALL-TO-HEAP heap items)	      ; O(n)
 
-(PEEP-AT-HEAP heap)   		      => O(1)
+(PEEP-AT-HEAP heap)   		      ; O(1)
 
-(POP-HEAP heap)			      => amortised O(log(n))
+(POP-HEAP heap)			      ; amortised O(log(n))
 
-(MERGE-HEAPS first second)	      => O(m + n)
+(MERGE-HEAPS first second)	      ; O(m + n)
 
-(NMERGE-HEAPS first second)	      => O(1)
+(NMERGE-HEAPS first second)	      ; O(1)
 
-(DECREASE-KEY heap item-index value)  => amortised O(1)
+(DECREASE-KEY heap item-index value)  ; amortised O(1)
 
-(DELETE-FROM-HEAP heap item-index)    => amortised O(1), except where
-		       		      	 the deleted item was the minimum
-		       		         item, in which case it is
-					 amortised O(log(n))
-
+(DELETE-FROM-HEAP heap item-index)    ; amortised O(1), except where
+		       		      ; the deleted item was the minimum
+		       		      ; item, in which case it is
+				      ; amortised O(log(n))
+```
 
 Examples of Use
 ---------------
 
 A heap can be created quite simply:
 
+```lisp
 (defparameter *heap* (make-instance 'cl-heap:fibonacci-heap))
+```
 
 This will create a heap where the elements are ordered using #'<.
 Elements can be added one at a time using ADD-TO-HEAP:
 
-(cl-heap:add-to-heap *heap* 1) 
+```lisp
+(cl-heap:add-to-heap *heap* 1)
+```
 
 or, in a batch.
 
+```lisp
 (cl-heap:add-all-to-heap *heap* '(6 4 7 3 2 0))
+```
 
 The minimum item in this heap can easily by seen using PEEP-AT-HEEP,
 which will not modify the heap in any way:
 
-(cl-heap:peep-at-heap *heap*) => 0
+```lisp
+(cl-heap:peep-at-heap *heap*) ; 0
+```
 
 The minimum item can be removed from the heap using POP-HEAP:
 
-(cl-heap:pop-heap *heap*) => 0
+```lisp
+(cl-heap:pop-heap *heap*) ; 0
+```
 
 Heaps can be used to sort items:
 
+```lisp
 (let ((heap (make-instance 'cl-heap:fibonacci-heap)))
   (cl-heap:add-all-to-heap heap (loop for i from 1 upto 10 collect (random 100)))
   (loop while (not (cl-heap:is-empty-heap-p heap)) collect (cl-heap:pop-heap heap)))
 
-=> (14 19 30 32 38 64 74 90 96 98)
+;; (14 19 30 32 38 64 74 90 96 98)
+```
 
 A max-heap can be constructed as follows:
 
+```lisp
 (defparameter *heap* (make-instance 'cl-heap:fibonacci-heap :sort-fun #'>))
+```
 
 And this will order things from most to least:
 
+```lisp
 (let ((heap (make-instance 'cl-heap:fibonacci-heap :sort-fun #'>)))
   (cl-heap:add-all-to-heap heap (loop for i from 1 upto 10 collect (random 100)))
   (loop while (not (cl-heap:is-empty-heap-p heap)) collect (cl-heap:pop-heap heap)))
 
-=> (69 68 64 60 37 34 30 7 6 1)  
+;; (69 68 64 60 37 34 30 7 6 1)
+```
 
 The heaps can contain arbitrary items. For instance, a heap whose
 elements are all lists can be constructed as follows:
 
+```lisp
 (defparameter *heap* (make-instance 'cl-heap:fibonacci-heap :key #'first))
 (cl-heap:add-to-heap *heap* (list 5 'some 'arbitrary 'data))
 (cl-heap:add-to-heap *heap* (list 4 'other 'data))
 (cl-heap:pop-heap *heap*) => (4 other data)
+```
 
 DECREASE-KEY and DELETE-FROM-HEAP can be used as follows:
 
+```lisp
 (defparameter *heap* (make-instance 'cl-heap:fibonacci-heap))
 (cl-heap:add-all-to-heap *heap* '(5 3 4 2 1))
 (let ((item-index (second (multiple-value-list (cl-heap:add-to-heap *heap* 10)))))
@@ -349,9 +396,10 @@ DECREASE-KEY and DELETE-FROM-HEAP can be used as follows:
      (cl-heap:decrease-key *heap* item-index 0)
      (format t "Smallest item: ~A~%" (cl-heap:peep-at-heap *heap*)))
 
-=> nil     
-Smallest item: 1
-Smallest item: 0     
+;; nil     
+;; Smallest item: 1
+;; Smallest item: 0
+```
 
 License
 -------
