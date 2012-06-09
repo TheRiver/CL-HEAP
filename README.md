@@ -251,27 +251,27 @@ Here are the Big-Oh running times for the heap API, where n and m are
 the sizes of various heaps.
 
 ```lisp
-(HEAP-SIZE heap)    	    	      ; O(1)
+(HEAP-SIZE heap)    	    	      => O(1)
 
-(EMPTY-HEAP heap)		      ; O(1)
+(EMPTY-HEAP heap)		      => O(1)
 
-(IS-EMPTY-HEAP-P heap)		      ; O(1)
+(IS-EMPTY-HEAP-P heap)		      => O(1)
 
-(ADD-TO-HEAP heap item)		      ; O(log(n))
+(ADD-TO-HEAP heap item)		      => O(log(n))
 
-(ADD-ALL-TO-HEAP heap items)	      ; O(n)
+(ADD-ALL-TO-HEAP heap items)	      => O(n)
 
-(PEEP-AT-HEAP heap)   		      ; O(1)
+(PEEP-AT-HEAP heap)   		      => O(1)
 
-(POP-HEAP heap)			      ; O(log(n))
+(POP-HEAP heap)			      => O(log(n))
 
-(MERGE-HEAPS first second)	      ; O(n + m + log(n + m))
+(MERGE-HEAPS first second)	      => O(n + m + log(n + m))
 
-(NMERGE-HEAPS first second)	      ; O(m + log(n + m))
+(NMERGE-HEAPS first second)	      => O(m + log(n + m))
 
-(DECREASE-KEY heap item-index value)  ; O(log(n))
+(DECREASE-KEY heap item-index value)  => O(log(n))
 
-(DELETE-FROM-HEAP heap item-index)    ; O(log(n))
+(DELETE-FROM-HEAP heap item-index)    => O(log(n))
 ```
 
 
@@ -289,30 +289,30 @@ Here are the Big-Oh running times for the heap API, where n and m are
 the sizes of various heaps.
 
 ```lisp
-(HEAP-SIZE heap)    	    	      ; O(1)
+(HEAP-SIZE heap)    	    	      => O(1)
 
-(EMPTY-HEAP heap)		      ; O(1)
+(EMPTY-HEAP heap)		      => O(1)
 
-(IS-EMPTY-HEAP-P heap)		      ; O(1)
+(IS-EMPTY-HEAP-P heap)		      => O(1)
 
-(ADD-TO-HEAP heap item)		      ; O(1)
+(ADD-TO-HEAP heap item)		      => O(1)
 
-(ADD-ALL-TO-HEAP heap items)	      ; O(n)
+(ADD-ALL-TO-HEAP heap items)	      => O(n)
 
-(PEEP-AT-HEAP heap)   		      ; O(1)
+(PEEP-AT-HEAP heap)   		      => O(1)
 
-(POP-HEAP heap)			      ; amortised O(log(n))
+(POP-HEAP heap)			      => amortised O(log(n))
 
-(MERGE-HEAPS first second)	      ; O(m + n)
+(MERGE-HEAPS first second)	      => O(m + n)
 
-(NMERGE-HEAPS first second)	      ; O(1)
+(NMERGE-HEAPS first second)	      => O(1)
 
-(DECREASE-KEY heap item-index value)  ; amortised O(1)
+(DECREASE-KEY heap item-index value)  => amortised O(1)
 
-(DELETE-FROM-HEAP heap item-index)    ; amortised O(1), except where
-		       		      ; the deleted item was the minimum
-		       		      ; item, in which case it is
-				      ; amortised O(log(n))
+(DELETE-FROM-HEAP heap item-index)    => amortised O(1), except where
+		       		         the deleted item was the minimum
+		       		         item, in which case it is
+				         amortised O(log(n))
 ```
 
 Examples of Use
@@ -341,13 +341,13 @@ The minimum item in this heap can easily by seen using PEEP-AT-HEEP,
 which will not modify the heap in any way:
 
 ```lisp
-(cl-heap:peep-at-heap *heap*) ; 0
+(cl-heap:peep-at-heap *heap*) => 0
 ```
 
 The minimum item can be removed from the heap using POP-HEAP:
 
 ```lisp
-(cl-heap:pop-heap *heap*) ; 0
+(cl-heap:pop-heap *heap*) => 0
 ```
 
 Heaps can be used to sort items:
@@ -357,7 +357,7 @@ Heaps can be used to sort items:
   (cl-heap:add-all-to-heap heap (loop for i from 1 upto 10 collect (random 100)))
   (loop while (not (cl-heap:is-empty-heap-p heap)) collect (cl-heap:pop-heap heap)))
 
-;; (14 19 30 32 38 64 74 90 96 98)
+=> (14 19 30 32 38 64 74 90 96 98)
 ```
 
 A max-heap can be constructed as follows:
@@ -373,7 +373,7 @@ And this will order things from most to least:
   (cl-heap:add-all-to-heap heap (loop for i from 1 upto 10 collect (random 100)))
   (loop while (not (cl-heap:is-empty-heap-p heap)) collect (cl-heap:pop-heap heap)))
 
-;; (69 68 64 60 37 34 30 7 6 1)
+=> (69 68 64 60 37 34 30 7 6 1)
 ```
 
 The heaps can contain arbitrary items. For instance, a heap whose
@@ -396,9 +396,9 @@ DECREASE-KEY and DELETE-FROM-HEAP can be used as follows:
      (cl-heap:decrease-key *heap* item-index 0)
      (format t "Smallest item: ~A~%" (cl-heap:peep-at-heap *heap*)))
 
-;; nil     
-;; Smallest item: 1
-;; Smallest item: 0
+=> nil     
+Smallest item: 1
+Smallest item: 0
 ```
 
 License
