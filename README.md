@@ -12,13 +12,13 @@ minimum spanning trees.
 The library is simple to use. Here's an example covering most of the
 priority queue functionality:
 
-	 (defparameter *queue* (make-instance 'cl-heap:priority-queue))
 ```lisp
+(defparameter *queue* (make-instance 'cl-heap:priority-queue))
+
 (cl-heap:enqueue *queue* 'test 15) ; Enqueue the item with the priority of 15.
 (cl-heap:enqueue *queue* 'this -5)
 (cl-heap:enqueue *queue* 'a 10)
 (cl-heap:enqueue *queue* 'is 5)
-```
 
 (cl-heap:peep-at-queue *queue*) => 'this
 
@@ -26,6 +26,7 @@ priority queue functionality:
 (cl-heap:dequeue *queue*) => 'is
 (cl-heap:dequeue *queue*) => 'a
 (cl-heap:dequeue *queue*) => 'test
+```
 
 The library provides an implementation of an array-based binary heap -
 offering O(log(n)) times for most operations - and the Fibonacci
@@ -44,12 +45,16 @@ testing. CL-HEAP has been tested and is known to run on SBCL. If
 you've tried this on other compilers and it runs successfully, please
 let me know. The library can be installed using ASDF-INSTALL:
 
+```lisp
 (require 'asdf-install)
 (asdf-install:install 'cl-heap)
+```
 
 And the library can then be loaded with ASDF:
 
+```lisp
 (asdf:oos 'asdf:load-op 'cl-heap)
+```
 
 Test Suite
 ----------
@@ -57,10 +62,11 @@ Test Suite
 CL-HEAP comes with a test suite. The tests for the various classes can
 be performed as follows:
 
+```lisp
 (xlunit:textui-test-run (xlunit:get-suite cl-heap:fibonacci-test))
 (xlunit:textui-test-run (xlunit:get-suite cl-heap:binary-test))
 (xlunit:textui-test-run (xlunit:get-suite cl-heap:priority-queue-test))
-
+```
 
 The PRIORITY-QUEUE Class
 ------------------------
