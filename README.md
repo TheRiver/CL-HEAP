@@ -1,5 +1,5 @@
 			       CL-HEAP
-			       -------
+			       =======
 
 CL-HEAP is a Common Lisp library that provides efficient priority
 queue and heap implementations. Heaps are tree data structure in which

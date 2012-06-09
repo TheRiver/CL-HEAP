@@ -1,3 +1,7 @@
+2012-06-09  Rudy Neeser  <rudy.neeser@gmail.com>
+
+	* README.md: Converted README to a markdown README
+
 2012-03-31  Rudy Neeser  <rudy.neeser@gmail.com>
 
 	* cl-heap-tests.asd (:cl-heap-tests): Updated version number to
