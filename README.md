@@ -74,28 +74,32 @@ The PRIORITY-QUEUE Class
 This priority queue is a container for items in which all the items
 are sorted by some given priority. We implement the priority queue
 using a Fibonacci heap.
+      
 
 MAKE-INSTANCE accepts the argument :sort-fun to provide the function
 which the items' priorities are sorted by. This defaults to #'<, which
 will cause the queue to always return the item of lowest priority.
 
-     (ENQUEUE queue item priority)
+```lisp (ENQUEUE queue item priority)```
 
-     Adds the item to the queue at the given priority. Returns a
-     list containing first the item's priority, then the item
-     itself. Running time: O(1)
+Adds the item to the queue at the given priority. Returns a
+list containing first the item's priority, then the item
+itself. Running time: O(1)
 
 (DEQUEUE queue)
-	 Removes the item of lowest priority from the queue. Running
-	 time: amortised O(log(n))
 
-(PEEP-AT-QUEUE queue)
-	 Returns the item of lowest priority from the queue, without
-	 modifying the queue. Running time: O(1)
+Removes the item of lowest priority from the queue. Running
+time: amortised O(log(n))
 
-(EMPTY-QUEUE queue)
-	 Removes all items from the queue. Returns the heap. Running
-	 time: O(1)
+      (PEEP-AT-QUEUE queue)
+
+Returns the item of lowest priority from the queue, without
+modifying the queue. Running time: O(1)
+
+      (EMPTY-QUEUE queue)
+
+Removes all items from the queue. Returns the heap. Running
+time: O(1)
 
 (QUEUE-SIZE queue)
 	 Returns the number of items in the queue. Running time: O(1)
@@ -280,8 +284,8 @@ A heap can be created quite simply:
 
 (defparameter *heap* (make-instance 'cl-heap:fibonacci-heap))
 
-This will create a heap where the elements are ordered using
-#'<. Elements can be added one at a time using ADD-TO-HEAP:
+This will create a heap where the elements are ordered using #'<.
+Elements can be added one at a time using ADD-TO-HEAP:
 
 (cl-heap:add-to-heap *heap* 1) 
 
