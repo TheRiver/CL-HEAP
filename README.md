@@ -43,14 +43,19 @@ Installation and Usage
 CL-HEAP depends on XLUNIT, which is used to perform unit
 testing. CL-HEAP has been tested and is known to run on SBCL. If
 you've tried this on other compilers and it runs successfully, please
-let me know. The library can be installed using ASDF-INSTALL:
+let me know. The library can be installed using either ASDF-INSTALL or
+QUICKLISP:
 
 ```lisp
 (require 'asdf-install)
 (asdf-install:install 'cl-heap)
+
+(quicklisp:quickload 'cl-heap)
+(quicklisp:quickload 'cl-heap-tests) 
 ```
 
-And the library can then be loaded with ASDF:
+After which, the library can then be loaded using either ASDF or
+QUICKLISP:
 
 ```lisp
 (asdf:load-system 'cl-heap)
