@@ -1,5 +1,5 @@
 ;;; Copyright 2009-2010 Rudolph Neeser <rudy.neeser@gmail.com>.
-;;; Copyright 2012 CL-HEAP (See AUTHORS file).
+;;; Copyright 2012-2013 CL-HEAP (See AUTHORS file).
 ;;; 
 ;;; This file is part of CL-HEAP
 ;;; 
