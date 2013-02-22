@@ -1,3 +1,8 @@
+2013-02-22  Rudy  <rudy.neeser@gmail.com>
+
+	* fibonacci-heap.lisp (nmerge-heaps): Accepted patch from Michał
+	Psota to remove unused variable bindings.
+
 2012-06-10  Rudy Neeser  <rudy.neeser@gmail.com>
 
 	* README.md (README.md): Updates for installation methods.

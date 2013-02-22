@@ -292,11 +292,9 @@ heap."
 (defmethod nmerge-heaps ((first fibonacci-heap) (second fibonacci-heap))
   "Destructively marges the two heaps. This is a constant time
 operation."
-  (with-slots ((first-root root)
-	       (first-key key)
+  (with-slots ((first-key key)
 	       (first-fun sort-fun)) first
-    (with-slots ((second-root root)
-		 (second-key key)
+    (with-slots ((second-key key)
 		 (second-fun sort-fun)) second
       (unless (and (eq first-key second-key)
 		   (eq first-fun second-fun))
