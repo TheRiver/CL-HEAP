@@ -1,6 +1,6 @@
 ;;; -*- Mode: Lisp; -*-
 ;;;
-;;; Copyright 2009-2010, 2012 Rudolph Neeser <rudy.neeser@gmail.com>
+;;; Copyright 2009-2010, 2012-2013 Rudolph Neeser <rudy.neeser@gmail.com>
 ;;; 
 ;;; This file is part of CL-HEAP
 ;;; 
@@ -27,7 +27,7 @@
 
 (defsystem :cl-heap
     :description "An implementation of heap and priority queue data structures."
-    :version "0.1.5"
+    :version "0.1.6"
     :author "Rudy Neeser <rudy.neeser@gmail.com>"
     :license "GPLv3"
     :serial t

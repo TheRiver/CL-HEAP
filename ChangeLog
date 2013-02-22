@@ -1,5 +1,9 @@
 2013-02-22  Rudy  <rudy.neeser@gmail.com>
 
+	* cl-heap-tests.asd (:cl-heap-tests): Updated version to 0.1.6
+
+	* cl-heap.asd (:cl-heap): Updated version to 0.1.6
+
 	* fibonacci-heap.lisp (nmerge-heaps): Accepted patch from Michał
 	Psota to remove unused variable bindings.
 
