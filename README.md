@@ -1,6 +1,8 @@
 CL-HEAP
 =======
 
+This library is no longer maintained. 
+
 CL-HEAP is a Common Lisp library that provides efficient priority
 queue and heap implementations. Heaps are tree data structure in which
 any child, c, of a parent, p, obeys the relation p R c, for some
