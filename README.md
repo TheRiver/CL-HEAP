@@ -127,12 +127,66 @@ The HEAP Class
 
 HEAP provides functionality common to the two heap classes implement
 by CL-HEAP. Each heap implementation accepts at least two arguments to
-MAKE-INSTANCE: :key and :sort-fun. :sort-fun supplies the function to
+MAKE-INSTANCE: :key and :sort-fun. 
+
+:sort-fun supplies the function to
 be used when comparing two objects to each other, and defaults to #'<.
-:key gives a function which should be first applied to the
-elements in the HEAP before comparing them using the sorting
-function. :key defaults to #'identity. These functions can be accessed
-using HEAP-KEY and HEAP-SORTING-FUNCTION.
+
+:key gives a function which should be first applied to the elements in
+the HEAP before comparing them using the sorting function. :key
+defaults to #'identity.  The function designated by :key will be used
+as a reader to obtain a prioritization value; but if DECREASE-KEY is
+used the function designated by :key will be called with a second
+argument, in which case the function is expected to be a setter.  See
+the documentation for DECREASE-KEY below.
+
+An additional restriction on the :key function is that CL-HEAP assumes
+it can re-call the function on a queued object at any time and
+retrieve the same value, for example when items are added to, removed
+from, or shuffled in the heap.  It is the responsibility of the client
+program to assure this invariant.  The following usage is not valid.
+
+```lisp
+(defun invalid-heap-usage ()
+  (let ((hash (make-hash-table :test #'equal)))
+    (setf (gethash "a" hash) 10
+          (gethash "b" hash) 11
+          (gethash "c" hash) 9)
+    (flet ((my-key (obj &rest values)
+             (if values
+                 (setf (gethash obj hash) (car values))
+                 (gethash obj hash))))
+      (let* ((heap (make-instance 'cl-heap:fibonacci-heap :key #'my-key))
+             (index-a (nth-value 1 (cl-heap:add-to-heap heap "a")))
+             (index-b (nth-value 1 (cl-heap:add-to-heap heap "b")))
+             (index-c (nth-value 1 (cl-heap:add-to-heap heap "c"))))
+
+        (setf (gethash "b" hash) 5) ;; ATTENTION (my-key "b") now returns something different than cl-heap has assumed!
+
+        (cl-heap:decrease-key heap index-b 5)))))
+```
+
+A call to such a function (in SBCL) will result in the following error:
+```lisp
+(invalid-heap-usage)
+
+The given value (5) must be less than the current value (5).
+   [Condition of type KEY-ERROR]
+
+Restarts:
+ 0: [RETRY] Retry SLIME REPL evaluation request.
+ 1: [*ABORT] Return to SLIME's top level.
+ 2: [ABORT] abort thread (#<THREAD "new-repl-thread" RUNNING {111CFEDE63}>)
+
+Backtrace:
+  0: ((:METHOD DECREASE-KEY (FIBONACCI-HEAP CL-HEAP::NODE T)) #<FIBONACCI-HEAP Size: 3 {15BA7B27F3}> #<CL-HEAP::NODE Item: b {15BA7B28C3}> 5) [fast-method]
+  1: (INVALID-HEAP-USAGE)
+  2: (SB-INT:SIMPLE-EVAL-IN-LEXENV (INVALID-HEAP-USAGE) #<NULL-LEXENV>)
+  3: (EVAL (INVALID-HEAP-USAGE))
+```
+
+The :key and :sort-fun functions can be accessed using HEAP-KEY and
+HEAP-SORTING-FUNCTION.
 
 Both of the heap implementations obey the same interface:
 
@@ -210,12 +264,6 @@ decreased. ITEM-INDEX is the second value returned by ADD-TO-HEAP, and
 VALUE should be smaller than the items current value, or a KEY-ERROR
 will be signalled. Returns the heap. See below for an example.
 
-```lisp
-(DELETE-FROM-HEAP heap item-index)
-```
-Allows you to specify an arbitrary item to remove from the
-heap. ITEM-INDEX is the second value returned by ADD-TO-HEAP.
-
 DECREASE-KEY requires that HEAP-KEY is either the function IDENTITY,
 or a function that accepts an optional second argument, which will be
 the value of the new key. For instance, if the elements in the heap
@@ -232,6 +280,12 @@ an appropriate HEAP-KEY could be:
 Of course, if DECREASE-KEY is not going to be used, then #'first
 itself could simply be used as the HEAP-KEY.
 	
+```lisp
+(DELETE-FROM-HEAP heap item-index)
+```
+Allows you to specify an arbitrary item to remove from the
+heap. ITEM-INDEX is the second value returned by ADD-TO-HEAP.
+
 
 The BINARY-HEAP Class
 ---------------------
@@ -429,5 +483,10 @@ References
 ----------
  
 M. L. Fredman and R. E. Tarjan. 1987. "Fibonacci Heaps and Their Uses
-in Improved Network Optimizxation Algorithms". Journal of the
+in Improved Network Optimization Algorithms". Journal of the
 Association for Computing Machinery, Vol 34, No 3. pp 596 - 615
+
+<!--  LocalWords:  Fredman Tarjan MERCHANTABILITY amortised iff SBCL
+ -->
+<!--  LocalWords:  ASDF QUICKLISP XLUNIT
+ -->
